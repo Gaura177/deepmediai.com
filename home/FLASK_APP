@@ -1,0 +1,89 @@
+from flask import Flask, render_template, request, jsonify
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+import numpy as np
+from flask_cors import CORS
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
+app = Flask(__name__)
+CORS(app)
+
+# Load the trained model
+model = load_model('../app/thermography_diabetic_foot_ulcer_classifier.keras')
+
+# Home route to serve the home page
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+# Index route to serve the patient information page
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+# Prediction route to serve the prediction page
+@app.route('/prediction')
+def prediction():
+    # Get query parameters
+    report_number = request.args.get('reportNumber')
+    doctor_name = request.args.get('doctorName')
+    name = request.args.get('name')
+    age = request.args.get('age')
+    sex = request.args.get('sex')
+    mobile = request.args.get('mobile')
+
+    
+    # Render the prediction page with patient info
+    return render_template('prediction.html', 
+                           report_number=report_number,
+                           doctor_name=doctor_name,
+                           name=name,
+                           age=age,
+                           sex=sex,
+                           mobile=mobile)
+
+
+
+from io import BytesIO
+from PIL import Image  # Import the Python Imaging Library for image processing
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image file provided'}), 400
+    
+    img_file = request.files['image']
+    if img_file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    try:
+        # Convert FileStorage to BytesIO
+        img_bytes = BytesIO(img_file.read())  # Read the image data into a BytesIO stream
+
+        # Load the image using PIL
+        img = Image.open(img_bytes)  # PIL's Image.open handles the BytesIO stream
+        img = img.resize((224, 224))  # Resize image to target size
+        img_array = np.array(img)  # Convert image to numpy array
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array = img_array.astype('float32') / 255.0  # Normalize the image
+
+        print(f"Image array shape: {img_array.shape}")  # Log the shape for debugging
+
+        # Predict using the model
+        prediction = model.predict(img_array)
+        print(f"Prediction output: {prediction}")  # Log the prediction output for debugging
+        result = 'Diabetic Foot Ulcer' if prediction[0] > 0.5 else 'Non-Diabetic Foot Ulcer'
+
+        # Send prediction result back to frontend
+        return jsonify({'prediction': result})
+
+    except Exception as e:
+        print(f"Error during prediction: {str(e)}")  # Log the error message
+        return jsonify({'error': 'An internal error occurred during prediction. Please check the server logs.'}), 500
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

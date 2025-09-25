@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Diabetic Foot Ulcer Diagnosis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .fade-in-delay {
+      animation: fadeIn 1s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes rotateBox {
+      0% { transform: rotateX(0); }
+      100% { transform: rotateX(-360deg); }
+    }
+
+    @keyframes lightning {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    .scene {
+      height: 40vmin;
+      perspective: 1000px;
+      margin: 2rem;
+      position: relative;
+      width: 40vmin;
+      max-width: 100%;
+    }
+
+    .cylinder {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      animation: rotateBox 20s linear infinite;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      overflow: hidden;
+      backface-visibility: hidden;
+    }
+
+    .lightning-line {
+      position: absolute;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, #04efeb, transparent);
+      animation: lightning 1s linear infinite;
+      filter: drop-shadow(0 0 12px #ffffffcc);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="text-white overflow-x-hidden" style="background: linear-gradient(135deg, #2E8B57, #3CB371);">
+
+  <!-- Navbar -->
+  <nav class="shadow-lg bg-[#2E8B57] fade-in">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/WhatsApp_Image_2025-04-02_at_12.52.45_b2f47306-removebg-preview-1.png" alt="DeepMediAi Logo" class="w-20 h-16 object-contain">
+        <h2 class="text-3xl font-extrabold">DeepmediAi</h2>
+      </div>
+      <div class="flex flex-col items-center sm:flex-row sm:space-x-6 space-y-2 sm:space-y-0 mt-4 sm:mt-0">
+        <button onclick="location.reload();" class="text-sm font-medium hover:text-yellow-200">Home</button>
+        <button onclick="window.location.href='index';" class="text-sm font-medium hover:text-yellow-200">Log In</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="text-center py-12 fade-in-delay">
+    <h2 class="text-4xl font-extrabold">SMART DIABETIC FOOT ULCER DIAGNOSIS</h2>
+    <a href="index" class="mt-6 inline-block bg-white text-[#2E8B57] px-6 py-3 rounded-full hover:bg-gray-200 transition">➡️ Get Started</a>
+  </section>
+
+  <!-- Main Section: Box on Left, Cards on Right -->
+  <section class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+    <!-- Left: 3D Animation Cylinder -->
+    <div class="flex justify-center">
+      <div class="scene">
+        <div class="cylinder" id="cylinder1"></div>
+      </div>
+    </div>
+
+    <!-- Right: 4 Feature Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-[#2E8B57] p-6 shadow-lg rounded-2xl hover:scale-105 transform transition duration-300">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-02-at-14.50.46_cd9cbe7a.jpg"
+             alt="Thermal Imaging"
+             class="w-28 h-28 mx-auto mb-4 object-cover rounded-full border-0 shadow" />
+        <h3 class="font-semibold text-white text-lg text-center">Thermal Imaging</h3>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-[#2E8B57] p-6 shadow-lg rounded-2xl hover:scale-105 transform transition duration-300">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/AdobeStock_600314909.jpeg"
+             alt="AI Analysis"
+             class="w-28 h-28 mx-auto mb-4 object-cover rounded-full border-0 shadow" />
+        <h3 class="font-semibold text-white text-lg text-center">AI Analysis</h3>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-[#2E8B57] p-6 shadow-lg rounded-2xl hover:scale-105 transform transition duration-300">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-02-at-14.52.43_36aeaec6.jpg"
+             alt="Deep Learning Model"
+             class="w-28 h-28 mx-auto mb-4 object-cover rounded-full border-0 shadow" />
+        <h3 class="font-semibold text-white text-lg text-center">Deep Learning Model</h3>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-[#2E8B57] p-6 shadow-lg rounded-2xl hover:scale-105 transform transition duration-300">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-02-at-14.50.46_b1deca2c.jpg"
+             alt="Secure Cloud Storage"
+             class="w-28 h-28 mx-auto mb-4 object-cover rounded-full border-0 shadow" />
+        <h3 class="font-semibold text-white text-lg text-center">Secure Cloud Storage</h3>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    const images = [
+      'https://aic-empi.org/wp-content/uploads/2025/04/file_0000000025a461f7898c817349dbad0c_conversation_id67f7ec34-b130-8001-87d0-65c19043350dmessage_id5b1b96f7-9685-4048-a9b7-cdad2c5fe2d9.png',
+      'https://aic-empi.org/wp-content/uploads/2025/04/file_00000000638061f7bda6069114edf75c_conversation_id67f7f4cf-4d4c-8001-b517-4cae30d78542message_id3bf680eb-2bc1-4912-bdd1-ac68c3ca11b7-2.png',
+      'https://aic-empi.org/wp-content/uploads/2025/04/foot-ulcer.png',
+      'https://aic-empi.org/wp-content/uploads/2025/04/Screenshot-2025-04-10-225639.png'
+    ];
+
+    function setupSlides(cylinderId, images) {
+      const cylinder = document.getElementById(cylinderId);
+      const total = images.length;
+
+      images.forEach((img, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.style.backgroundImage = `url("${img}")`;
+        slide.style.transform = `rotateX(${i * (360 / total)}deg) translateZ(20vmin)`;
+
+        const lightning = document.createElement('div');
+        lightning.className = 'lightning-line';
+
+        slide.appendChild(lightning);
+        cylinder.appendChild(slide);
+      });
+    }
+
+    setupSlides('cylinder1', images);
+  </script>
+
+</body>
+</html>
+
+
+  
+  
+
+  <!-- Advanced Features -->
+  <section class="py-12 fade-in" id="get-started">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <!-- Feature Cards -->
+      <!-- Repeat this block for each feature -->
+      <div class="bg-[#3CB371] p-6 rounded-lg shadow">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/digital-fortress-secure-data-encryption-concept-cybersecurity-techniques-protection-cryptography-communication-315377874.webp"
+             alt="Feature Image" class="w-28 h-28 object-cover rounded-full mx-auto mb-4 border-2 border-white shadow-md">
+        <h4 class="text-lg font-bold text-white mb-2">Secure Data Encryption</h4>
+        <p class="text-white">Protecting patient data with advanced encryption ensuring confidentiality and security.</p>
+      </div>
+
+      <div class="bg-[#3CB371] p-6 rounded-lg shadow">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/closeup-mechanic-performing-detailed-diagnostic-analysis_1280275-311491.jpg"
+             alt="Feature Image" class="w-28 h-28 object-cover rounded-full mx-auto mb-4 border-2 border-white shadow-md">
+        <h4 class="text-lg font-bold text-white mb-2">Mobile Integration</h4>
+        <p class="text-white">Access and monitor health data seamlessly from your mobile device and real-time updates.</p>
+      </div>
+
+      <div class="bg-[#3CB371] p-6 rounded-lg shadow">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/AI-Breakthrough-in-Early-Disease-Detection.webp"
+             alt="Feature Image" class="w-28 h-28 object-cover rounded-full mx-auto mb-4 border-2 border-white shadow-md">
+        <h4 class="text-lg font-bold text-white mb-2">Early Detection</h4>
+        <p class="text-white">Detect foot ulcers in the earliest stages, enabling timely intervention & better patient outcomes.</p>
+      </div>
+
+      <div class="bg-[#3CB371] p-6 rounded-lg shadow">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/AI-photo.jpg"
+             alt="Feature Image" class="w-28 h-28 object-cover rounded-full mx-auto mb-4 border-2 border-white shadow-md">
+        <h4 class="text-lg font-bold text-white mb-2">Detailed Analytic</h4>
+        <p class="text-white">Delivers in-depth analysis of thermal patterns and trends to support accurate diagnosis and continuous monitoring.</p>
+      </div>
+
+      <div class="bg-[#3CB371] p-6 rounded-lg shadow">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-02-at-14.50.46_adb375d1.jpg"
+             alt="Feature Image" class="w-28 h-28 object-cover rounded-full mx-auto mb-4 border-2 border-white shadow-md">
+        <h4 class="text-lg font-bold text-white mb-2">AI-Powered Analysis</h4>
+        <p class="text-white">Utilizes cutting-edge artificial intelligence to identify ulcer risks with speed and high precision, enhancing diagnostic accuracy.</p>
+      </div>
+
+      <div class="bg-[#3CB371] p-6 rounded-lg shadow">
+        <img src="https://aic-empi.org/wp-content/uploads/2025/04/main-smart-reporting-1-scaled-1-1024x686-1.png"
+             alt="Feature Image" class="w-28 h-28 object-cover rounded-full mx-auto mb-4 border-2 border-white shadow-md">
+        <h4 class="text-lg font-bold text-white mb-2">Smart Reporting System</h4>
+        <p class="text-white">Generates comprehensive, easy-to-understand reports that assist doctors in making informed treatment decisions faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logos Section -->
+  <section class="py-8 fade-in-delay">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-around items-center text-center space-y-6 md:space-y-0">
+      <!-- Developed by -->
+      <div>
+        <p class="text-white font-semibold mb-2 text-lg">Developed by</p>
+        <div class="bg-white p-4 rounded-lg inline-block">
+          <img src="https://aic-empi.org/wp-content/uploads/2025/04/WhatsApp_Image_2025-04-02_at_11.42.56_99656983-removebg-preview.png"
+               alt="Developed by Logo"
+               class="w-30 h-20 object-contain">
+        </div>
+      </div>
+
+      <!-- Supported by -->
+      <div>
+        <p class="text-white font-semibold mb-2 text-lg">Supported by</p>
+        <div class="bg-white p-4 rounded-lg inline-block">
+          <img src="https://aic-empi.org/wp-content/uploads/2025/04/WhatsApp_Image_2025-04-02_at_11.42.55_94b2453d-removebg-preview.png"
+               alt="Supported by Logo"
+               class="w-30 h-20 object-contain">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#2E8B57] text-white text-center py-6 mt-12 fade-in">
+    <p>Developed by EMPI Innovation Hub | Supported by IIT Roorkee</p>
+    <p class="text-sm mt-2">© 2025 SmartDFU. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Glassmorphism Login & Patient Info</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #2E8B57, #3CB371);
+            flex-direction: column;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            width: 420px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 25px;
+            padding: 45px;
+            text-align: center;
+            color: #080707;
+            position: absolute;
+            transform: scale(0.9);
+            transition: transform 0.5s ease-in-out;
+        }
+        .form-container input, .form-container select, .form-container button {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .form-container input, .form-container select {
+            background: rgba(255, 255, 255, 0.2);
+            color: #0a0a0a;
+            text-align: center;
+        }
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+        .password-container input {
+            padding-right: 40px;
+        }
+        .password-container .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #fff;
+            font-size: 18px;
+        }
+        .form-container button {
+            background: #228B22;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background: #2E8B57;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var icon = document.getElementById("toggleIcon");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.textContent = "";
+            } else {
+                passwordField.type = "password";
+                icon.textContent = "👁";
+            }
+        }
+
+        function login() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            if (email === "ihub.empi@empi.ac.in" && password === "Project@empi") {
+                document.getElementById("loginContainer").classList.add("hidden");
+                document.getElementById("patientInfoContainer").classList.remove("hidden");
+            } else {
+                alert("Invalid Email or Password. Please try again.");
+            }
+        }
+
+        function redirectToPrediction() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var gender = document.getElementById("gender").value;
+            var contact = document.getElementById("contact").value;
+            var address = document.getElementById("address").value;
+
+            if (!name || !age || !gender || !contact || !address) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            // Save data in localStorage
+            localStorage.setItem("patientName", name);
+            localStorage.setItem("patientAge", age);
+            localStorage.setItem("patientGender", gender);
+            localStorage.setItem("patientContact", contact);
+            localStorage.setItem("patientAddress", address);
+
+            window.location.href = "prediction"; // Redirects to the prediction page
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="loginContainer">
+        <div class="form-container">
+            <h1>Sign In</h1>
+            <input type="email" id="email" placeholder="Email" />
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Password" />
+                <span class="toggle-password" id="toggleIcon" onclick="togglePassword()">👁</span>
+            </div>
+            <button onclick="login()">Sign In</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="patientInfoContainer">
+        <div class="form-container">
+            <h1>Patient Information</h1>
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="number" id="age" placeholder="Age" required>
+            <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="text" id="contact" placeholder="Contact Number" required>
+            <input type="text" id="address" placeholder="Address" required>
+            <button onclick="redirectToPrediction()">Submit</button>
+        </div>
+    </div>
+</body>
+</html>
